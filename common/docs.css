@@ -320,6 +320,7 @@ body{
 #main pre code{
 	padding: 10px;
 	border: 1px solid var(--content-code-block-border-color);
+	display: block;
 }
 
 #main a{
