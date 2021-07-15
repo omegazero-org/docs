@@ -30,6 +30,8 @@
 	--content-separator-color: gray;
 	--content-code-background: rgb(40, 40, 40);
 	--content-code-block-border-color: rgb(64, 64, 64);
+	--sidebar-toggle-bar-height: 5px;
+	--sidebar-toggle-margin: 10px;
 }
 
 
@@ -68,7 +70,8 @@ body{
 	border-right: 1px solid var(--sidebar-border-color);
 	padding-top: 10px;
 	display: table;
-
+	transition: left .2s ease-in-out;
+	z-index: 2;
 	width: var(--sidebar-width);
 }
 
@@ -103,6 +106,53 @@ body{
 }
 
 
+#hideSidebar{
+	display: none;
+}
+
+#hideSidebarLabel{
+	display: none;
+	float: left;
+	cursor: pointer;
+}
+
+#hideSidebarLabel svg{
+	width: var(--topbar-height);
+	height: var(--topbar-height);
+}
+
+#hideSidebarLabel svg .ibar{
+	fill: white;
+	width: calc(var(--topbar-height) - calc(var(--sidebar-toggle-margin) * 2));
+	height: var(--sidebar-toggle-bar-height);
+	x: var(--sidebar-toggle-margin);
+}
+
+#hideSidebarLabel svg .ibar1{
+	y: var(--sidebar-toggle-margin);
+}
+
+#hideSidebarLabel svg .ibar2{
+	y: calc(calc(var(--topbar-height) - var(--sidebar-toggle-bar-height)) / 2);
+}
+
+#hideSidebarLabel svg .ibar3{
+	y: calc(var(--topbar-height) - calc(var(--sidebar-toggle-bar-height) + var(--sidebar-toggle-margin)));
+}
+
+
+#mainModal{
+	display: none;
+	position: absolute;
+	top: var(--topbar-height);
+	width: 100%;
+	height: calc(100% - var(--topbar-height));
+	background-color: black;
+	opacity: 0.5;
+	z-index: 1;
+}
+
+
 #main{
 	position: absolute;
 	top: var(--topbar-height);
@@ -129,9 +179,6 @@ body{
 	text-decoration: none;
 	color: inherit;
 	display: block;
-}
-
-.sidebar-entry:hover{
 	cursor: pointer;
 }
 
@@ -281,6 +328,31 @@ body{
 
 #main a:hover{
 	color: #8ff;
+}
+
+
+
+@media only screen and (max-width: 600px){
+	#hideSidebarLabel{
+		display: block;
+	}
+
+	#hideSidebar:checked ~ .sidebar{
+		left: calc(0px - var(--sidebar-width));
+	}
+
+	#hideSidebar:not(:checked) ~ #mainModal{
+		display: block;
+	}
+
+	#main{
+		left: 0;
+		width: calc(100% - var(--content-padding) * 2);
+	}
+
+	.title{
+		font-size: 20px;
+	}
 }
 
 

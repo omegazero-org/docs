@@ -355,6 +355,13 @@ echo "<meta name=\"docsRoot\" content=\"" . $docsRootDir . "\" />";
 	<body>
 
 <div id="topbar" class="bar topbar">
+	<label id="hideSidebarLabel" for="hideSidebar">
+		<svg>
+			<rect class="ibar ibar1" />
+			<rect class="ibar ibar2" />
+			<rect class="ibar ibar3" />
+		</svg>
+	</label>
 
 <?php
 
@@ -392,6 +399,7 @@ echo '</select>';
 ?>
 
 </div>
+<input id="hideSidebar" type="checkbox" checked />
 <div id="sidebar" class="bar sidebar">
 
 <?php
@@ -423,7 +431,7 @@ function addSidebarObject(object $obj, int $depth, string $base){
 		}else if(is_object($value)){
 			$key = nameToKey($name);
 			$id = 'sidebar_collapsible_' . $key;
-			echo '<a id="' . $id . '" class="sidebar-entry sidebar-entry-l' . $depth . ' sidebar-collapsible" href="javascript:void(0);">' . $name . '</a><div id="' . $id . '_content">';
+			echo '<a id="' . $id . '" class="sidebar-entry sidebar-entry-l' . $depth . ' sidebar-collapsible">' . $name . '</a><div id="' . $id . '_content">';
 			addSidebarObject($value, $depth + 1, $base . $key . "/");
 			echo '</div>';
 		}else{
@@ -452,6 +460,7 @@ echo '</div>';
 
 </div>
 
+<div id="mainModal"></div>
 <div id="main">
 	<div id="loadingBar"></div>
 	<div id="mainContent">

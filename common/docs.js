@@ -44,6 +44,11 @@
 
 		docsRoot = document.querySelector("meta[name='docsRoot']").content;
 		addLinkClickListeners(document.getElementById("main"));
+
+		hideSidebarToggle = document.getElementById("hideSidebar");
+		document.getElementById("mainModal").addEventListener("click", function(){
+			hideSidebarToggle.checked = "1";
+		});
 	}
 
 	function addLinkClickListeners(wrap){
@@ -56,12 +61,15 @@
 
 	var docsRoot;
 
+	var hideSidebarToggle;
+
 	function entryClick(event){
 		var target = event.target;
 		if(target.origin != window.location.origin || !target.pathname.startsWith(docsRoot))
 			return;
 
 		event.preventDefault();
+		hideSidebarToggle.checked = "1";
 
 		switchContent(target.href, target);
 
