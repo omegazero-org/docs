@@ -26,7 +26,6 @@
 	--bar-text-color: var(--text-color);
 	--sidebar-width: 300px;
 	--topbar-height: 50px;
-	--content-padding: 15px;
 	--content-separator-color: gray;
 	--content-code-background: rgb(40, 40, 40);
 	--content-code-block-border-color: rgb(64, 64, 64);
@@ -157,11 +156,12 @@ body{
 	position: absolute;
 	top: var(--topbar-height);
 	left: var(--sidebar-width);
-	width: calc(100% - var(--sidebar-width) - var(--content-padding) * 2);
-	padding: var(--content-padding);
-	height: calc(100% - var(--topbar-height) - var(--content-padding) * 2);
+	width: calc(100% - var(--sidebar-width));
+	padding: 15px;
+	height: calc(100% - var(--topbar-height));
 	overflow: auto;
 	background-color: var(--content-background);
+	box-sizing: border-box;
 }
 
 #loadingBar{
@@ -348,7 +348,7 @@ body{
 
 	#main{
 		left: 0;
-		width: calc(100% - var(--content-padding) * 2);
+		width: 100%;
 	}
 
 	.title{
