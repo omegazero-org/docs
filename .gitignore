@@ -1,2 +1,3 @@
 
-/d/lib/
+/d/lib/Parsedown*
+/d/lib/htmlpurifier

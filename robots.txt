@@ -2,4 +2,4 @@
 User-agent: *
 
 Disallow: /common/
-Disallow: /d/*?tag=
+Disallow: /d/*?version=

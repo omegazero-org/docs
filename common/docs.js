@@ -26,15 +26,20 @@
 						cur = cur.substring(0, queryIndex);
 					window.location.href = cur;
 				}else
-					window.location.href = "?tag=" + name;
+					window.location.href = "?version=" + name;
 			}
 		}
 
 		window.addEventListener("popstate", windowStatePop);
 
+		hideSidebarToggle = document.getElementById("hideSidebar");
+		document.getElementById("mainModal").addEventListener("click", function(){
+			hideSidebarToggle.checked = "1";
+		});
+
 		var entries = document.getElementsByClassName("sidebar-regularentry");
 		for(var el of entries){
-			el.addEventListener("click", entryClick);
+			el.addEventListener("click", entryClickSE);
 		}
 
 		var collapsible = document.getElementsByClassName("sidebar-collapsible");
@@ -42,19 +47,17 @@
 			el.addEventListener("click", collapsibleClick);
 		}
 
-		docsRoot = document.querySelector("meta[name='docsRoot']").content;
-		addLinkClickListeners(document.getElementById("main"));
-
-		hideSidebarToggle = document.getElementById("hideSidebar");
-		document.getElementById("mainModal").addEventListener("click", function(){
-			hideSidebarToggle.checked = "1";
-		});
+		docsRootEl = document.querySelector("meta[name='docsRoot']");
+		if(docsRootEl){
+			docsRoot = docsRootEl.content;
+			addLinkClickListeners(document.getElementById("main"));
+		}
 	}
 
 	function addLinkClickListeners(wrap){
 		var els = wrap.getElementsByTagName("a");
 		for(var el of els){
-			el.addEventListener("click", entryClick);
+			el.addEventListener("click", entryClickC);
 		}
 	}
 
@@ -63,7 +66,15 @@
 
 	var hideSidebarToggle;
 
-	function entryClick(event){
+	function entryClickSE(event){
+		entryClick(event, event.target);
+	}
+
+	function entryClickC(event){
+		entryClick(event, document.getElementById("sidebar_entry_-" + event.target.pathname.substring(docsRoot.length + 1).replace(/\//g, "-")));
+	}
+
+	function entryClick(event, entryElement){
 		var target = event.target;
 		if(target.origin != window.location.origin || !target.pathname.startsWith(docsRoot))
 			return;
@@ -71,7 +82,7 @@
 		event.preventDefault();
 		hideSidebarToggle.checked = "1";
 
-		switchContent(target.href, target);
+		switchContent(target.href, entryElement);
 
 		window.history.pushState({entryElementId: target.id}, document.title, target.href);
 	}
