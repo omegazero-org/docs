@@ -201,7 +201,7 @@ if($resourceValid){
 	</head>
 	<body>
 
-<div id="topbar" class="bar topbar">
+<header class="bar topbar">
 	<label id="hideSidebarLabel" for="hideSidebar">
 		<svg>
 			<rect class="ibar ibar1" />
@@ -213,7 +213,7 @@ if($resourceValid){
 <?php
 
 if(resourceMetadataAvailable("icon", "string"))
-	echo '<img id="logo" src="' . safeMeta($resource->metadata->icon) . '" class="logo" />';
+	echo '<img id="logo" src="' . safeMeta($resource->metadata->icon) . '" class="logo" alt="Documentation logo" />';
 
 if(resourceMetadataAvailable("title", "string"))
 	echo '<span id="title" class="title">' . safeMeta($resource->metadata->title) . '</span>';
@@ -231,9 +231,9 @@ if($resourceValid){
 
 ?>
 
-</div>
+</header>
 <input id="hideSidebar" type="checkbox" checked />
-<div id="sidebar" class="bar sidebar">
+<nav class="bar sidebar">
 
 <?php
 
@@ -284,10 +284,10 @@ echo '</div>';
 
 ?>
 
-</div>
+</nav>
 
 <div id="mainModal"></div>
-<div id="main">
+<main id="main">
 	<div id="loadingBar"></div>
 	<div id="mainContent">
 <?php endif; ?>
@@ -344,7 +344,7 @@ if($confinitError){
 
 <?php if(!$contentOnly) : ?>
 	</div>
-</div>
+</main>
 
 	</body>
 </html>
