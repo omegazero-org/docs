@@ -244,6 +244,10 @@ main{
 	margin-right: var(--sidebar-arrow-margin);
 }
 
+.sidebar-collapsible{
+	user-select: none;
+}
+
 .sidebar-collapsible::before{
 	content: " ";
 	display: inline-block;
