@@ -237,37 +237,42 @@ if($resourceValid){
 
 <?php
 
-function addSidebarEntry(object $entry, int $depth, string $base){
+function addSidebarEntry(object $entry, int $depth, string $base, bool $deep){
 	global $docsRootDir;
 	global $versionNameQuery;
-	if($depth > 3){
-		errormsgconf("Maximum depth exceeded: 3");
+	$maxDepth = $deep ? 10 : 3;
+	if($depth > $maxDepth){
+		errormsgconf("Maximum depth exceeded: " . $maxDepth);
 		return;
 	}
 	if($entry->type == "line"){
 		echo '<div class="line"></div>';
 	}else if($entry->type == "link"){
-		echo '<a id="sidebar_entry_' . str_replace("/", "-", $base) . $entry->id . '" class="sidebar-entry sidebar-entry-l' . $depth . ($entry->selected ? ' sidebar-entry-selected' : '')
-			. ' sidebar-regularentry" href="' . $docsRootDir . $base . $entry->id . $versionNameQuery . '">' . $entry->name . '</a>';
+		echo '<a id="sidebar_entry_' . str_replace("/", "-", $base) . $entry->id . '" class="sidebar-entry sidebar-entry-' . ($deep ? 'deep' : ('l' . $depth))
+			. ($entry->selected ? ' sidebar-entry-selected' : '') . ' sidebar-regularentry" style="--depth: ' . ($depth - 1) . ';" href="' . $docsRootDir . $base . $entry->id
+			. $versionNameQuery . '">' . $entry->name . '</a>';
 	}
 }
 
-function addSidebarObject(array $content, int $depth, string $base){
+function addSidebarObject(array $content, int $depth, string $base, bool $deep){
 	foreach($content as $entry){
 		if($entry->type == "category"){
 			$id = 'sidebar_collapsible_-' . $entry->id;
-			echo '<a id="' . $id . '" class="sidebar-entry sidebar-entry-l' . $depth . ' sidebar-collapsible">' . $entry->name . '</a><div id="' . $id . '_content">';
-			addSidebarObject($entry->content, $depth + 1, $base . $entry->id . "/");
+			echo '<a id="' . $id . '" class="sidebar-entry sidebar-entry-' . ($deep ? 'deep' : ('l' . $depth)) . ' sidebar-collapsible" style="--depth: ' . ($depth - 1) . ';">'
+				. $entry->name . '</a><div id="' . $id . '_content">';
+			addSidebarObject($entry->content, $depth + 1, $base . $entry->id . "/", $deep);
 			echo '</div>';
 		}else{
-			addSidebarEntry($entry, $depth, $base);
+			addSidebarEntry($entry, $depth, $base, $deep);
 		}
 	}
 }
 
 if($resourceValid){
 	if(isset($resource->sidebarContent) && gettype($resource->sidebarContent) == "array"){
-		addSidebarObject($resource->sidebarContent, 1, "/");
+		if(!isset($resource->sidebarDeep))
+			$resource->sidebarDeep = false;
+		addSidebarObject($resource->sidebarContent, 1, "/", !!$resource->sidebarDeep);
 	}else{
 		errormsgconf("sidebar content is missing or invalid");
 	}

@@ -62,6 +62,8 @@ class FileDataSource implements DataSource{
 		$resource->purify = true;
 		$resource->rootDir = $rootDir . "/" . $basePath;
 		$resource->sidebarContent = FileDataSource::createSidebarContent($basePathAbs, "", $selId);
+		if(isset($metadata->sidebarDeep))
+			$resource->sidebarDeep = $metadata->sidebarDeep;
 		return $resource;
 	}
 

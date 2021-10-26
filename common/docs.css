@@ -205,6 +205,14 @@ main{
 	width: calc(100% - var(--sidebar-category-indentation) * 2);
 }
 
+.sidebar-entry-deep{
+	background-color: var(--sidebar-entry-l1-background);
+	font-size: 14px;
+	padding: 2px 4px;
+	margin-left: calc(var(--sidebar-category-indentation) * var(--depth));
+	width: calc(100% - var(--sidebar-category-indentation) * var(--depth));
+}
+
 .sidebar-entry-l1:hover{
 	background-color: var(--sidebar-entry-l1-hover);
 }
@@ -215,6 +223,10 @@ main{
 
 .sidebar-entry-l3:hover{
 	background-color: var(--sidebar-entry-l3-hover);
+}
+
+.sidebar-entry-deep:hover{
+	background-color: var(--sidebar-entry-l1-hover);
 }
 
 .sidebar-entry-selected{
