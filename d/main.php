@@ -257,7 +257,7 @@ function addSidebarEntry(object $entry, int $depth, string $base, bool $deep){
 function addSidebarObject(array $content, int $depth, string $base, bool $deep){
 	foreach($content as $entry){
 		if($entry->type == "category"){
-			$id = 'sidebar_collapsible_-' . $entry->id;
+			$id = 'sidebar_collapsible_' . str_replace("/", "-", $base) . $entry->id;
 			echo '<a id="' . $id . '" class="sidebar-entry sidebar-entry-' . ($deep ? 'deep' : ('l' . $depth)) . ' sidebar-collapsible" style="--depth: ' . ($depth - 1) . ';">'
 				. $entry->name . '</a><div id="' . $id . '_content">';
 			addSidebarObject($entry->content, $depth + 1, $base . $entry->id . "/", $deep);
