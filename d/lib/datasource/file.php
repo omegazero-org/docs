@@ -43,6 +43,10 @@ class FileDataSource implements DataSource{
 			return null;
 
 		$selId = "_" . str_replace(array("/", " "), "_", $filename);
+		if($filename === "" && isset($metadata->rootRedirect)){
+			redirectTo($metadata->rootRedirect);
+			return null;
+		}
 		$filePath = $basePathAbs . $filename . ".md";
 		if(!str_starts_with($filePath, $this->baseDir) || !file_exists($filePath)){
 			errormsginitconf("File does not exist");
