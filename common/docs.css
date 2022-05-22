@@ -38,6 +38,7 @@ body{
 	margin: 0px;
 	font-family: Calibri, Tahoma, Arial;
 	color: var(--text-color);
+	background-color: var(--content-background);
 }
 
 
@@ -157,10 +158,9 @@ main{
 	top: var(--topbar-height);
 	left: var(--sidebar-width);
 	width: calc(100% - var(--sidebar-width));
+	min-height: calc(100% - 50px);
 	padding: 15px;
-	height: calc(100% - var(--topbar-height));
 	overflow: auto;
-	background-color: var(--content-background);
 	box-sizing: border-box;
 }
 
