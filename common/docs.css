@@ -51,7 +51,7 @@ body{
 }
 
 .topbar{
-	width: 100vw;
+	width: 100%;
 	position: absolute;
 	top: 0px;
 	background-color: var(--topbar-background);
@@ -154,6 +154,7 @@ body{
 
 
 main{
+	height: calc(100% - var(--topbar-height));
 	position: absolute;
 	top: var(--topbar-height);
 	left: var(--sidebar-width);
