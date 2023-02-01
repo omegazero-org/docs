@@ -15,7 +15,7 @@ declare(strict_types=1);
 require_once("config.php");
 
 
-$VERSION = "2.2.0";
+$VERSION = "2.2.1";
 
 
 function request(string $url){
@@ -268,6 +268,7 @@ function addSidebarObject(array $content, int $depth, string $base, bool $deep){
 	}
 }
 
+echo '<div class="entries">';
 if($resourceValid){
 	if(isset($resource->sidebarContent) && gettype($resource->sidebarContent) == "array"){
 		if(!isset($resource->sidebarDeep))
@@ -276,9 +277,8 @@ if($resourceValid){
 	}else{
 		errormsgconf("sidebar content is missing or invalid");
 	}
-}else{ // empty div to push links div to bottom
-	echo '<div></div>';
 }
+echo '</div>';
 
 
 echo '<div class="links"><a href="https://docs.omegazero.org/">omz-docs v' . $VERSION . '</a>';

@@ -69,10 +69,31 @@ body{
 	background-color: var(--sidebar-background);
 	border-right: 1px solid var(--sidebar-border-color);
 	padding-top: 10px;
-	display: table;
+	display: flex;
+	flex-direction: column;
 	transition: left .2s ease-in-out;
 	z-index: 2;
 	width: var(--sidebar-width);
+}
+
+.sidebar .entries{
+	flex: 1 0 auto;
+}
+
+.sidebar .links{
+	color: #888;
+	font-size: 14px;
+	padding: 4px;
+	margin-top: 12px;
+}
+
+.sidebar .links a{
+	text-decoration: none;
+	color: #aaa;
+}
+
+.sidebar .links a:hover{
+	color: #ddd;
 }
 
 .logo{
@@ -270,23 +291,6 @@ main{
 	display: block;
 	padding-bottom: 1px;
 	background-color: var(--separator-color);
-}
-
-.sidebar .links{
-	vertical-align: bottom;
-	display: table-row;
-	height: 1px;
-	color: #888;
-	font-size: 14px;
-}
-
-.sidebar .links a{
-	text-decoration: none;
-	color: #aaa;
-}
-
-.sidebar .links a:hover{
-	color: #ddd;
 }
 
 
