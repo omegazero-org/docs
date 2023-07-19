@@ -72,9 +72,11 @@ function errormsgconf(string $str){
 	errormsg('Configuration Error: ' . $str);
 }
 
-function str_starts_with(string $str, string $prefix) : bool{
-	$prefixLen = strlen($prefix);
-	return strlen($str) > $prefixLen && substr($str, 0, $prefixLen) == $prefix;
+if(!function_exists("str_starts_with")){
+	function str_starts_with(string $str, string $prefix) : bool{
+		$prefixLen = strlen($prefix);
+		return strlen($str) > $prefixLen && substr($str, 0, $prefixLen) == $prefix;
+	}
 }
 
 
